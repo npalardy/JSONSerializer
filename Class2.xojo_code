@@ -8,6 +8,16 @@ Protected Class Class2
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Shared Function CustomDeSerializer(propInfo as Introspection.PropertyInfo, v as Variant) As Variant
+		  // create the serializer instance
+		  Dim serializer As New JSONSerializer
+		  
+		  Return serializer.DeSerialize( JsonItem(v).ToString,  GetTypeInfo(Class2) ) 
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h21
 		Private Shared Function CustomSerializer(propInfo as Introspection.PropertyInfo, v as Variant) As Variant
 		  

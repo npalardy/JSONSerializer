@@ -3,9 +3,9 @@ Protected Class App
 Inherits ConsoleApplication
 	#tag Event
 		Function Run(args() as String) As Integer
-		  RunSimpleTest()
+		  // RunSimpleTest()
 		  
-		  RunCustomSerializerTest()
+		  // RunCustomSerializerTest()
 		  
 		  RunSerializeHierarchy()
 		End Function
@@ -105,29 +105,44 @@ Inherits ConsoleApplication
 		  
 		  System.debuglog s
 		  
-		  // // serialize the serialized for into a new object
-		  // Dim wf1 As WeatherForecastWithPropertyName = serializer.Deserialize(s,  GetTypeInfo(WeatherForecastWithPropertyName) )
-		  // 
-		  // 
-		  // // and see that we get back what we serialized
-		  // 
-		  // // note that the custom serializer / deserializer used here preserves the SecondsFrom!970
-		  // If wf.WhatDate.SecondsFrom1970 <> wf1.WhatDate.SecondsFrom1970 Then
-		  // Break
-		  // End If
-		  // If wf.Summary <> wf1.Summary Then
-		  // Break
-		  // End If
-		  // If wf.TemperatureCelsius <> wf1.TemperatureCelsius Then
-		  // Break
-		  // End If
-		  // If wf.WindSpeed <> wf1.WindSpeed Then
-		  // Break
-		  // End If
-		  // 
-		  // serializer.RemoveCustomSerializer("DateTime", AddressOf myCustomSerializer)
-		  // serializer.RemoveCustomDeserializer("DateTime", AddressOf myCustomDeserializer)
-		  // 
+		  serializer = New JSONSerializer
+		  
+		  serializer.AddCustomDeserializer("Class2", AddressOf Class2.CustomDeSerializer)
+		  
+		  // deserialize the serialized for into a new object
+		  Dim cDeserialized As Class1 = serializer.Deserialize(s,  GetTypeInfo(Class1) )
+		  
+		  // and see that we get back what we serialized
+		  // NOTE you cant compare INSTANCES for being the same since deserialization
+		  // creates new ones
+		  // IF you implemented the custom operator_compare method on your classes then you could test that way
+		  // see https://documentation.xojo.com/api/language/operators/operator_overloads/operator_compare.html#operator-compare
+		  // and see if they had the same contents
+		  
+		  If (cDeserialized IsA Class1) = False Then 
+		    Break
+		  End If
+		  
+		  If cDeserialized.name <> "Class1" Then
+		    Break
+		  End If
+		  
+		  If (cDeserialized.c2 IsA Class2) <> True Then
+		    Break
+		  End If
+		  
+		  If cDeserialized.c2.name <> "class2" Then
+		    Break
+		  End If
+		  
+		  If (cDeserialized.c2.c3 IsA Class3) <> True Then
+		    Break
+		  End If
+		  
+		  If cDeserialized.c2.c3.name <> "class3" Then
+		    Break
+		  End If
+		  
 		  
 		End Sub
 	#tag EndMethod

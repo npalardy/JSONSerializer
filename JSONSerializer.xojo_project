@@ -1,5 +1,5 @@
 Type=Console
-RBProjectVersion=2023.011
+RBProjectVersion=2024.042
 MinIDEVersion=20070100
 OrigIDEVersion=20230101
 Class=App;App.xojo_code;&h000000006B589FFF;&h0000000000000000;false
@@ -40,6 +40,7 @@ UseGDIPlus=False
 UseBuildsFolder=True
 CopyRedistNextToWindowsEXE=False
 IncludePDB=False
+WinUIFramework=False
 IsWebProject=False
 LinuxBuildArchitecture=1
 MacBuildArchitecture=4

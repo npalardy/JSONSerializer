@@ -25,11 +25,11 @@ Protected Class JSONSerializer
 	#tag EndMethod
 
 	#tag DelegateDeclaration, Flags = &h0
-		Delegate Function CustomPropertyDeserializer(propInfo as Introspection.PropertyInfo, v as Variant) As variant
+		Delegate Function CustomPropertyDeserializer(propInfo as Introspection . PropertyInfo, v as Variant) As variant
 	#tag EndDelegateDeclaration
 
 	#tag DelegateDeclaration, Flags = &h0
-		Delegate Function CustomPropertySerializer(propInfo as Introspection.PropertyInfo, v as Variant) As Variant
+		Delegate Function CustomPropertySerializer(propInfo as Introspection . PropertyInfo, v as Variant) As Variant
 	#tag EndDelegateDeclaration
 
 	#tag Method, Flags = &h0
@@ -65,11 +65,11 @@ Protected Class JSONSerializer
 		    Dim propInfos() As Introspection.PropertyInfo = returntype.GetProperties
 		    
 		    For Each propInfo As Introspection.PropertyInfo In propInfos
-		       
+		      
 		      If propInfo.IsPublic = False Then
 		        Continue
 		      End If
-		       
+		      
 		      Dim attrs() As Introspection.AttributeInfo = propInfo.GetAttributes
 		      
 		      Dim jSONPropName As String = propInfo.Name
@@ -101,7 +101,7 @@ Protected Class JSONSerializer
 		        End If
 		      End Try
 		      
-		     Next
+		    Next
 		    
 		    Return v
 		    
