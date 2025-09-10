@@ -3,11 +3,13 @@ Protected Class App
 Inherits ConsoleApplication
 	#tag Event
 		Function Run(args() as String) As Integer
-		  // RunSimpleTest()
+		  RunSimpleTest()
 		  
-		  // RunCustomSerializerTest()
+		  RunCustomSerializerTest()
 		  
 		  RunSerializeHierarchy()
+		  
+		  
 		End Function
 	#tag EndEvent
 
@@ -99,12 +101,19 @@ Inherits ConsoleApplication
 		  
 		  // create an instance
 		  Dim c1 As New Class1
+		  c1.name = "testclass1"
+		  c1.c2 = New Class2
+		  c1.c2.name = "testclass2"
+		  c1.c2.c3 = New class3
+		  c1.c2.c3.name = "testclass3"
 		  
 		  // serialize 
 		  Dim s As String = serializer.Serialize( c1 ) 
 		  
 		  System.debuglog s
 		  
+		  
+		  // now deserialize from what we just serialized
 		  serializer = New JSONSerializer
 		  
 		  serializer.AddCustomDeserializer("Class2", AddressOf Class2.CustomDeSerializer)
@@ -123,7 +132,7 @@ Inherits ConsoleApplication
 		    Break
 		  End If
 		  
-		  If cDeserialized.name <> "Class1" Then
+		  If cDeserialized.name <> "testclass1" Then
 		    Break
 		  End If
 		  
@@ -131,7 +140,7 @@ Inherits ConsoleApplication
 		    Break
 		  End If
 		  
-		  If cDeserialized.c2.name <> "class2" Then
+		  If cDeserialized.c2.name <> "testclass2" Then
 		    Break
 		  End If
 		  
@@ -139,7 +148,7 @@ Inherits ConsoleApplication
 		    Break
 		  End If
 		  
-		  If cDeserialized.c2.c3.name <> "class3" Then
+		  If cDeserialized.c2.c3.name <> "testclass3" Then
 		    Break
 		  End If
 		  

@@ -1,17 +1,11 @@
 #tag Class
 Protected Class Class2
 	#tag Method, Flags = &h0
-		Sub Constructor()
-		  c3 = New class3
-		  
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Shared Function CustomDeSerializer(propInfo as Introspection.PropertyInfo, v as Variant) As Variant
 		  // create the serializer instance
 		  Dim serializer As New JSONSerializer
+		  
+		  serializer.AddCustomDeserializer("Class3", AddressOf Class3.CustomDeSerializer)
 		  
 		  Return serializer.DeSerialize( JsonItem(v).ToString,  GetTypeInfo(Class2) ) 
 		  

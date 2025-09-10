@@ -83,8 +83,12 @@ Protected Class JSONSerializer
 		      
 		      
 		      Try
+		        #Pragma BreakOnExceptions False
 		        propInfo.Value(v) = j.Value(jSONPropName) 
+		        #Pragma BreakOnExceptions default
 		      Catch 
+		        #Pragma BreakOnExceptions default
+		        
 		        Dim customHandler As CustomPropertyDeserializer 
 		        If mCustomDeserializers <> Nil Then
 		          customHandler = mCustomDeserializers.Lookup(propInfo.PropertyType.Name, Nil) 
@@ -140,6 +144,8 @@ Protected Class JSONSerializer
 	#tag Method, Flags = &h0
 		Sub ResetCustomizations()
 		  mCustomSerializers = Nil
+		  mCustomDeserializers = Nil 
+		  
 		  
 		End Sub
 	#tag EndMethod

@@ -1,12 +1,5 @@
 #tag Class
 Protected Class Class1
-	#tag Method, Flags = &h0
-		Sub Constructor()
-		  c2 = new class2
-		End Sub
-	#tag EndMethod
-
-
 	#tag Property, Flags = &h0
 		c2 As class2
 	#tag EndProperty
